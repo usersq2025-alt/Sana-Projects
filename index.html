@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قائمة برامج التعليم - مؤسسة ملهم 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --ink:#182230; --muted:#667085;
+  --line:#e4e7ec; --accent:#1f6f78; --accent2:#0f766e;
+  --warn:#b54708; --danger:#b42318; --ok:#027a48; --soft:#eef6f6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma, Arial, sans-serif;line-height:1.55}
+.container{max-width:1240px;margin:auto;padding:28px}
+.header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:22px}
+h1{font-size:28px;margin:0 0 6px;font-weight:800}
+.subtitle{color:var(--muted);font-size:14px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap}
+select,input{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;color:var(--ink);min-width:165px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 22px rgba(16,24,40,.04)}
+.kpi .label{font-size:13px;color:var(--muted);margin-bottom:8px}
+.kpi .value{font-size:25px;font-weight:800}
+.kpi .hint{font-size:12px;color:var(--muted);margin-top:5px}
+.grid{display:grid;grid-template-columns:1.55fr .75fr;gap:16px;margin-bottom:16px}
+.section-title{font-size:18px;font-weight:800;margin:0 0 12px}
+.timeline{position:relative;overflow:auto;padding-bottom:4px;direction:rtl;max-height:430px;border:1px solid var(--line);border-radius:14px;background:#fff;scrollbar-width:thin}
+.months{display:grid;grid-template-columns:170px repeat(32,42px);gap:0;border-bottom:1px solid var(--line);min-width:1514px;direction:rtl;position:sticky;top:0;background:#fff;z-index:5}
+.months div{font-size:11px;color:var(--muted);padding:6px 3px;border-left:1px solid var(--line);white-space:nowrap;direction:rtl;text-align:center}
+.row{display:grid;grid-template-columns:170px repeat(32,42px);min-width:1514px;align-items:center;border-bottom:1px solid #f0f2f5;min-height:30px;direction:rtl}
+.row .pname{font-size:10px;font-weight:700;padding:4px 7px;color:#344054;direction:rtl;text-align:right;position:sticky;right:0;background:#fff;z-index:3;border-left:1px solid var(--line)}
+.barwrap{grid-column:2 / -1;position:relative;height:17px;direction:rtl}
+.bar{position:absolute;height:15px;border-radius:999px;background:linear-gradient(270deg,#1f6f78,#52a8a2);top:1px;box-shadow:0 3px 9px rgba(31,111,120,.18)}
+.bar.missing{background:repeating-linear-gradient(45deg,#d0d5dd,#d0d5dd 6px,#eaecf0 6px,#eaecf0 12px)}
+.legend{display:flex;gap:14px;color:var(--muted);font-size:12px;margin-top:10px;flex-wrap:wrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#1f6f78;margin-left:5px}
+.dot.missing{background:#d0d5dd}
+.donor-list{display:grid;gap:10px}
+.donor-item{display:flex;justify-content:space-between;gap:8px;padding:10px;border-radius:12px;background:#f9fafb;border:1px solid #edf0f2}
+.donor-item b{font-size:13px}
+.donor-item span{color:var(--muted);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.project-card{display:flex;flex-direction:column;gap:10px}
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge{font-size:12px;padding:4px 9px;border-radius:999px;background:#eef6f6;color:#115e59;border:1px solid #cde8e5}
+.badge.warn{background:#fff7ed;color:#b54708;border-color:#fed7aa}
+.badge.gray{background:#f2f4f7;color:#475467;border-color:#eaecf0}
+.p-title{font-weight:800;font-size:15px;min-height:47px}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--muted)}
+.progress{height:8px;background:#eaecf0;border-radius:999px;overflow:hidden}
+.progress div{height:100%;background:#0f766e}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:13px}
+th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th{background:#f8fafc;font-weight:800;color:#344054;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.missing-text{color:var(--danger);font-weight:700}
+.ok-text{color:var(--ok);font-weight:700}
+.footer-note{font-size:12px;color:var(--muted);margin-top:12px}
+@media(max-width:980px){.kpis,.cards,.grid{grid-template-columns:1fr}.header{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div>
+      <h1>قائمة برامج التعليم - مؤسسة ملهم 2026</h1>
+<div class="subtitle">المسؤول المباشر: سنا حواصلي - مسؤول أول لبرنامج التعليم</div>
+    </div>
+    <div class="toolbar">
+      <input id="search" placeholder="بحث باسم المشروع أو المانح">
+      <select id="donorFilter"><option value="">كل المانحين</option></select>
+
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="card kpi"><div class="label">عدد المشاريع</div><div class="value" id="kpiProjects"></div><div class="hint">ضمن الملف الحالي</div></div>
+    <div class="card kpi"><div class="label">إجمالي التمويل المحتمل</div><div class="value" id="kpiFunding"></div><div class="hint">حسب عمود الميزانية من ملف المنح</div></div>
+    <div class="card kpi"><div class="label">تواريخ مكتملة</div><div class="value" id="kpiDates"></div><div class="hint">تاريخ البدء + تاريخ الانتهاء</div></div>
+    <div class="card kpi"><div class="label">متوسط نسبة الإنجاز</div><div class="value" id="kpiProgress"></div><div class="hint">للمشاريع الظاهرة حالياً</div></div>
+  </div>
+<div class="card">
+    <h2 class="section-title">قائمة البرامج</h2>
+    <div class="table-wrap">
+      <table id="detailsTable">
+        <thead>
+          <tr>
+            <th>#</th><th>اسم المشروع</th><th>المانح</th><th>المنطقة</th><th>الحالة</th><th>تاريخ البدء</th><th>تاريخ الانتهاء</th><th>التمويل المحتمل</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">الخريطة الزمنية للبرامج</h2>
+    <div class="timeline" id="timeline"></div>
+    <div class="legend"><span><i class="dot"></i> الشريط يوضح فترة المشروع من تاريخ البدء إلى تاريخ الانتهاء</span></div>
+  </div>
+
+  <h2 class="section-title">بطاقات البرامج</h2>
+  <div class="cards" id="cards"></div>
+</div>
+
+<script>
+const projects = [{"id": 1, "section": "التعليم", "manager": "سنا حواصلي", "name": "مركز الشباب للابتكار", "donor": "CA", "area": "دمشق", "status": "قيد التنفيذ", "progress": 0.7, "contract_budget": 40000, "potential_funding": 80000, "start": "2026-01-01", "end": "2026-08-31", "notes": "حسب التحديث: يبدأ مع بداية شهر 1 وينتهي مع نهاية شهر 8 / 2026."}, {"id": 2, "section": "التعليم", "manager": "سنا حواصلي", "name": "مشروع البرمجة في المدارس", "donor": "داخلي فريق ملهم + مؤسسة آفاق", "area": "ريف دمشق", "status": "تخطيط للموسم القادم", "progress": 0.2, "contract_budget": 32586, "potential_funding": 300000, "start": "2026-02-01", "end": "2027-05-31", "notes": "حسب التحديث: بدأ في شهر 2 / 2026 وينتهي نهاية 5 / 2027. التمويل المحتمل 300,000 دولار."}, {"id": 3, "section": "التعليم", "manager": "سنا حواصلي", "name": "أثاث ومعدات تعليمية لمدرستي جسرين - ناصر عشعوش", "donor": "My Care", "area": "دمشق", "status": "مراجعة مناقصات", "progress": 0.7, "contract_budget": null, "potential_funding": 27900, "start": "2026-05-01", "end": "2026-08-31", "notes": "حسب التحديث: تم البدء من بداية شهر 5 وتنتهي نهاية شهر 8 / 2026."}, {"id": 4, "section": "التعليم", "manager": "سنا حواصلي", "name": "مجالس المعلمين وأولياء الأمور 10 مجالس", "donor": "آغا خان", "area": "إدلب - حلب", "status": "التخطيط", "progress": 0, "contract_budget": null, "potential_funding": 45000, "start": "2026-06-01", "end": "2027-05-31", "notes": "حسب التحديث: البداية شهر 6 والنهاية مع نهاية العام الدراسي 5 / 2027."}, {"id": 5, "section": "التعليم", "manager": "سنا حواصلي", "name": "ركن أهلاً سمسم في المدارس", "donor": "أهلاً سمسم", "area": "مدارس ملهم - إدلب وأعزاز", "status": "انتظار الموافقة", "progress": 0.05, "contract_budget": null, "potential_funding": 10000, "start": "2026-06-08", "end": "2026-12-31", "notes": "حسب التحديث: رُفعت الدراسة قبل أسبوع تقريباً، واعتُمد تاريخ 08-06-2026 كبداية مبدئية، والنهاية قبل نهاية 2026."}, {"id": 6, "section": "التعليم", "manager": "سنا حواصلي", "name": "مدارس كريستيان ايد", "donor": "CA", "area": "مدارس ملهم", "status": "قيد التنفيذ / متابعة", "progress": 0.2, "contract_budget": null, "potential_funding": 55200, "start": "2026-06-15", "end": "2026-07-31", "notes": "حسب التحديث: من 15 حزيران وحتى نهاية شهر 7 / 2026. الميزانية المعتمدة 55,200 دولار."}, {"id": 7, "section": "التعليم", "manager": "سنا حواصلي", "name": "تأهيل مركز جديد لمدرسة ملهم الأيتام", "donor": "داخلي - جسور", "area": "إدلب", "status": "دراسة التكاليف", "progress": 0.05, "contract_budget": null, "potential_funding": 80000, "start": "2026-06-25", "end": "2026-09-30", "notes": "حسب التحديث: يبدأ من 25 حزيران وينتهي نهاية شهر 9 / 2026."}, {"id": 8, "section": "التعليم", "manager": "سنا حواصلي", "name": "مراكز مجتمعية للطفولة المبكرة عدد 2", "donor": "آغا خان", "area": "ريف إدلب", "status": "التخطيط", "progress": 0, "contract_budget": null, "potential_funding": 30000, "start": "2026-07-01", "end": "2026-12-31", "notes": "تاريخ البداية افتراضي حسب التحديث: شهر 7، والانتهاء قبل نهاية 2026."}, {"id": 9, "section": "التعليم", "manager": "سنا حواصلي", "name": "حملة تبرعات في أمريكا", "donor": "جسور", "area": "إدلب", "status": "التخطيط - انطلاقة الحملة ببداية شهر آب", "progress": 0, "contract_budget": null, "potential_funding": 100000, "start": "2026-08-01", "end": "2026-08-31", "notes": "حسب التحديث: الحملة يجب أن تنتهي مع نهاية شهر 8 / 2026."}, {"id": 10, "section": "التعليم", "manager": "سنا حواصلي", "name": "تمكين الشباب بشهادات دولية في البرمجيات", "donor": "لومينوس", "area": "جامعات سوريا - فيزيائي وأونلاين", "status": "موافقات ودراسة الاحتياج", "progress": 0.05, "contract_budget": null, "potential_funding": 1000000, "start": "2026-08-01", "end": "2028-07-31", "notes": "حسب التحديث: البداية المتوقعة شهر 8 والمدة سنتان."}];
+const startBase = new Date('2026-01-01');
+const months = [];
+for(let i=0;i<32;i++){
+  const d = new Date(startBase); d.setMonth(d.getMonth()+i);
+  months.push({key:d.toISOString().slice(0,7), label: String(d.getMonth()+1).padStart(2,'0') + '/' + String(d.getFullYear()).slice(2)});
+}
+function money(n){return n==null ? 'غير محدد' : '$' + Number(n).toLocaleString('en-US');}
+function dateTxt(v){if(!v) return 'غير محدد'; const d=new Date(v+'T00:00:00'); return d.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'numeric'});}
+function getFiltered(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const donor = document.getElementById('donorFilter').value;
+  return projects.filter(p=>{
+    const hay = (p.name+' '+p.donor+' '+p.status+' '+p.area).toLowerCase();
+    const okQ = !q || hay.includes(q);
+    const okD = !donor || p.donor===donor;
+    return okQ && okD;
+  });
+}
+
+function render(){
+  const data = getFiltered();
+  document.getElementById('kpiProjects').textContent = data.length;
+  document.getElementById('kpiFunding').textContent = money(data.reduce((s,p)=>s+(p.potential_funding||0),0));
+  document.getElementById('kpiDates').textContent = data.filter(p=>p.start&&p.end).length + ' / ' + data.length;
+  const avg = data.length ? data.reduce((s,p)=>s+(p.progress||0),0)/data.length : 0;
+  document.getElementById('kpiProgress').textContent = Math.round(avg*100) + '%';
+
+  const timeline = document.getElementById('timeline');
+  timeline.innerHTML = '';
+  const header = document.createElement('div'); header.className='months';
+  header.innerHTML = '<div>المشروع</div>' + months.map(m=>`<div>${m.label}</div>`).join('');
+  timeline.appendChild(header);
+  data.forEach(p=>{
+    const r=document.createElement('div'); r.className='row';
+    const name=document.createElement('div'); name.className='pname'; name.textContent=p.name; r.appendChild(name);
+    const wrap=document.createElement('div'); wrap.className='barwrap';
+    const bar=document.createElement('div'); bar.className='bar ' + (!(p.start&&p.end)?'missing':'');
+    let startIdx=0, endIdx=1;
+    if(p.start){ startIdx = (new Date(p.start).getFullYear()-2026)*12 + new Date(p.start).getMonth(); }
+    if(p.end){ endIdx = (new Date(p.end).getFullYear()-2026)*12 + new Date(p.end).getMonth()+1; }
+    if(!p.start && !p.end){ startIdx=0; endIdx=32; }
+    if(p.start && !p.end){ endIdx=Math.min(startIdx+5,32); }
+    if(!p.start && p.end){ startIdx=Math.max(endIdx-5,0); }
+    bar.style.right = (startIdx*42)+'px';
+    bar.style.width = (Math.max(endIdx-startIdx,1)*42-6)+'px';
+    bar.title = p.name + '\nتاريخ البدء: ' + dateTxt(p.start) + '\nتاريخ الانتهاء: ' + dateTxt(p.end);
+    wrap.appendChild(bar); r.appendChild(wrap); timeline.appendChild(r);
+  });
+document.getElementById('cards').innerHTML = data.map(p=>`
+    <div class="card project-card">
+      <div class="badges"><span class="badge">${p.donor}</span></div>
+      <div class="p-title">${p.name}</div>
+      <div class="meta"><div>المنطقة: ${p.area}</div><div>الحالة: ${p.status}</div><div>تاريخ البدء: ${dateTxt(p.start)}</div><div>تاريخ الانتهاء: ${dateTxt(p.end)}</div></div>
+      <div class="progress"><div style="width:${Math.round((p.progress||0)*100)}%"></div></div>
+      <div class="meta"><div>الإنجاز: ${Math.round((p.progress||0)*100)}%</div><div>التمويل: ${money(p.potential_funding)}</div></div>
+    </div>
+  `).join('');
+
+  const tbody = document.querySelector('#detailsTable tbody');
+  tbody.innerHTML = data.map((p,i)=>{
+    return `<tr>
+      <td>${i+1}</td><td><b>${p.name}</b><br><span style="color:#667085">${p.notes||''}</span></td><td>${p.donor}</td><td>${p.area}</td><td>${p.status}</td>
+      <td class="${p.start?'ok-text':'missing-text'}">${dateTxt(p.start)}</td>
+      <td class="${p.end?'ok-text':'missing-text'}">${dateTxt(p.end)}</td>
+      <td>${money(p.potential_funding)}</td>
+    </tr>`;
+  }).join('');
+}
+function init(){
+  const donors=[...new Set(projects.map(p=>p.donor))].sort();
+  document.getElementById('donorFilter').innerHTML += donors.map(d=>`<option value="${d}">${d}</option>`).join('');
+  ['search','donorFilter'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+  render();
+}
+init();
+</script>
+</body>
+</html>
