@@ -107,7 +107,42 @@ tr:last-child td{border-bottom:0}
 </div>
 
 <script>
-const projects = [{"id": 1, "section": "التعليم", "manager": "سنا حواصلي", "name": "مركز الشباب للابتكار", "donor": "CA", "area": "دمشق", "status": "قيد التنفيذ", "progress": 0.7, "contract_budget": 40000, "potential_funding": 80000, "start": "2026-01-01", "end": "2026-08-31", "notes": "حسب التحديث: يبدأ مع بداية شهر 1 وينتهي مع نهاية شهر 8 / 2026."}, {"id": 2, "section": "التعليم", "manager": "سنا حواصلي", "name": "مشروع البرمجة في المدارس", "donor": "داخلي فريق ملهم + مؤسسة آفاق", "area": "ريف دمشق", "status": "تخطيط للموسم القادم", "progress": 0.2, "contract_budget": 32586, "potential_funding": 300000, "start": "2026-02-01", "end": "2027-05-31", "notes": "حسب التحديث: بدأ في شهر 2 / 2026 وينتهي نهاية 5 / 2027. التمويل المحتمل 300,000 دولار."}, {"id": 3, "section": "التعليم", "manager": "سنا حواصلي", "name": "أثاث ومعدات تعليمية لمدرستي جسرين - ناصر عشعوش", "donor": "My Care", "area": "دمشق", "status": "مراجعة مناقصات", "progress": 0.7, "contract_budget": null, "potential_funding": 27900, "start": "2026-05-01", "end": "2026-08-31", "notes": "حسب التحديث: تم البدء من بداية شهر 5 وتنتهي نهاية شهر 8 / 2026."}, {"id": 4, "section": "التعليم", "manager": "سنا حواصلي", "name": "مجالس المعلمين وأولياء الأمور 10 مجالس", "donor": "آغا خان", "area": "إدلب - حلب", "status": "التخطيط", "progress": 0, "contract_budget": null, "potential_funding": 45000, "start": "2026-06-01", "end": "2027-05-31", "notes": "حسب التحديث: البداية شهر 6 والنهاية مع نهاية العام الدراسي 5 / 2027."}, {"id": 5, "section": "التعليم", "manager": "سنا حواصلي", "name": "ركن أهلاً سمسم في المدارس", "donor": "أهلاً سمسم", "area": "مدارس ملهم - إدلب وأعزاز", "status": "انتظار الموافقة", "progress": 0.05, "contract_budget": null, "potential_funding": 10000, "start": "2026-06-08", "end": "2026-12-31", "notes": "حسب التحديث: رُفعت الدراسة قبل أسبوع تقريباً، واعتُمد تاريخ 08-06-2026 كبداية مبدئية، والنهاية قبل نهاية 2026."}, {"id": 6, "section": "التعليم", "manager": "سنا حواصلي", "name": "مدارس كريستيان ايد", "donor": "CA", "area": "مدارس ملهم", "status": "قيد التنفيذ / متابعة", "progress": 0.2, "contract_budget": null, "potential_funding": 55200, "start": "2026-06-15", "end": "2026-07-31", "notes": "حسب التحديث: من 15 حزيران وحتى نهاية شهر 7 / 2026. الميزانية المعتمدة 55,200 دولار."}, {"id": 7, "section": "التعليم", "manager": "سنا حواصلي", "name": "تأهيل مركز جديد لمدرسة ملهم الأيتام", "donor": "داخلي - جسور", "area": "إدلب", "status": "دراسة التكاليف", "progress": 0.05, "contract_budget": null, "potential_funding": 80000, "start": "2026-06-25", "end": "2026-09-30", "notes": "حسب التحديث: يبدأ من 25 حزيران وينتهي نهاية شهر 9 / 2026."}, {"id": 8, "section": "التعليم", "manager": "سنا حواصلي", "name": "مراكز مجتمعية للطفولة المبكرة عدد 2", "donor": "آغا خان", "area": "ريف إدلب", "status": "التخطيط", "progress": 0, "contract_budget": null, "potential_funding": 30000, "start": "2026-07-01", "end": "2026-12-31", "notes": "تاريخ البداية افتراضي حسب التحديث: شهر 7، والانتهاء قبل نهاية 2026."}, {"id": 9, "section": "التعليم", "manager": "سنا حواصلي", "name": "حملة تبرعات في أمريكا", "donor": "جسور", "area": "إدلب", "status": "التخطيط - انطلاقة الحملة ببداية شهر آب", "progress": 0, "contract_budget": null, "potential_funding": 100000, "start": "2026-08-01", "end": "2026-08-31", "notes": "حسب التحديث: الحملة يجب أن تنتهي مع نهاية شهر 8 / 2026."}, {"id": 10, "section": "التعليم", "manager": "سنا حواصلي", "name": "تمكين الشباب بشهادات دولية في البرمجيات", "donor": "لومينوس", "area": "جامعات سوريا - فيزيائي وأونلاين", "status": "موافقات ودراسة الاحتياج", "progress": 0.05, "contract_budget": null, "potential_funding": 1000000, "start": "2026-08-01", "end": "2028-07-31", "notes": "حسب التحديث: البداية المتوقعة شهر 8 والمدة سنتان."}];
+/* ============================================================================
+ *  مصدر البيانات: Google Sheets عبر Google Apps Script API
+ *  عدّل القيمتين أدناه فقط بعد نشر الـ Web App (راجع دليل الإعداد المرفق).
+ * ========================================================================== */
+const API_URL   = 'https://script.google.com/macros/s/AKfycbxyjLMhJuybk91f2urdxKdyiyGM_Li3wcSvS9Tl4sBMK3qDquI5eCAiXd_0MS39HHo/exec';   // مثال: https://script.google.com/macros/s/XXXXX/exec
+const API_TOKEN = 'ngfodvdmXtEHkVQEwBKspE_nTB4YSdfE';     // نفس القيمة الموجودة في ورقة Settings > API_TOKEN
+const LOCAL_CACHE_KEY = 'molham_projects_cache_v1';
+
+let projects = [];
+
+async function fetchProjects(){
+  const url = API_URL + '?token=' + encodeURIComponent(API_TOKEN);
+  const res = await fetch(url, { method: 'GET' });
+  if(!res.ok) throw new Error('HTTP ' + res.status);
+  const json = await res.json();
+  if(!json || json.success !== true) throw new Error((json && json.error) || 'استجابة غير صالحة من الخادم');
+  return json.projects || [];
+}
+
+async function loadData(){
+  try{
+    projects = await fetchProjects();
+    try{ localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(projects)); }catch(e){}
+    return true;
+  }catch(err){
+    console.error('تعذر جلب البيانات من الـ API:', err);
+    // خطة بديلة: استخدام آخر نسخة محفوظة محلياً إن وجدت، حتى لا تظهر الصفحة فارغة تماماً
+    try{
+      const cached = localStorage.getItem(LOCAL_CACHE_KEY);
+      if(cached){ projects = JSON.parse(cached); return 'cached'; }
+    }catch(e){}
+    projects = [];
+    return false;
+  }
+}
+
 const startBase = new Date('2026-01-01');
 const months = [];
 for(let i=0;i<32;i++){
@@ -176,11 +211,30 @@ document.getElementById('cards').innerHTML = data.map(p=>`
     </tr>`;
   }).join('');
 }
-function init(){
+async function init(){
+  const tbody = document.querySelector('#detailsTable tbody');
+  tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted)">... جاري تحميل البيانات</td></tr>';
+
+  const loadResult = await loadData();
+
+  if(loadResult === false){
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center" class="missing-text">تعذر الاتصال بمصدر البيانات (Google Sheets API). تحقق من رابط الـ API والرمز في أعلى الصفحة.</td></tr>';
+    document.getElementById('cards').innerHTML = '';
+    return;
+  }
+
   const donors=[...new Set(projects.map(p=>p.donor))].sort();
   document.getElementById('donorFilter').innerHTML += donors.map(d=>`<option value="${d}">${d}</option>`).join('');
   ['search','donorFilter'].forEach(id=>document.getElementById(id).addEventListener('input',render));
   render();
+
+  if(loadResult === 'cached'){
+    const note = document.createElement('div');
+    note.className = 'footer-note';
+    note.style.color = 'var(--warn)';
+    note.textContent = 'ملاحظة: تعذر الاتصال بالخادم الآن، البيانات المعروضة من آخر نسخة محفوظة محلياً وقد لا تكون محدّثة.';
+    document.querySelector('.container').appendChild(note);
+  }
 }
 init();
 </script>
