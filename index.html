@@ -6,157 +6,298 @@
 <title>قائمة برامج التعليم - مؤسسة ملهم 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f5f7fa; --card:#ffffff; --ink:#182230; --muted:#667085;
-  --line:#e4e7ec; --accent:#1f6f78; --accent2:#0f766e;
-  --warn:#b54708; --danger:#b42318; --ok:#027a48; --soft:#eef6f6;
-  --radius-lg:18px; --radius-md:14px; --radius-sm:10px;
-  --shadow-card:0 1px 2px rgba(16,24,40,.04), 0 8px 22px rgba(16,24,40,.05);
+  --bg:#f3f5f9; --surface:#ffffff; --surface-2:#f8fafc;
+  --ink:#101828; --ink-2:#344054; --muted:#667085; --faint:#98a2b3;
+  --line:#e6e9ef; --line-soft:#eef1f6;
+  --brand:#0f6d74; --brand-ink:#0b4f54; --brand-soft:#e7f2f2; --brand-line:#c9e4e2;
+  --ok:#067647; --ok-soft:#ecfdf3; --ok-line:#abefc6;
+  --warn:#b54708; --warn-soft:#fff7ed; --warn-line:#fed7aa;
+  --gray:#475467; --gray-soft:#f2f4f7; --gray-line:#e4e7ec;
+  --danger:#b42318;
+  --radius:16px; --radius-sm:11px; --radius-lg:20px;
+  --shadow:0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.05);
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --ring:0 0 0 4px rgba(15,109,116,.13);
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Cairo",Tahoma,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.container{max-width:1280px;margin:auto;padding:32px 28px 60px}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1100px 420px at 85% -8%, rgba(15,109,116,.06), transparent 60%),
+    var(--bg);
+  color:var(--ink);
+  font-family:"IBM Plex Sans Arabic", Tahoma, Arial, sans-serif;
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.container{max-width:1200px;margin:auto;padding:clamp(16px,4vw,36px)}
 
 /* ---------- Header ---------- */
-.header{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid var(--line)}
-h1{font-size:26px;margin:0 0 8px;font-weight:800;letter-spacing:-.2px}
-.subtitle{color:var(--muted);font-size:13.5px;display:flex;align-items:center;gap:6px}
-.subtitle b{color:var(--ink);font-weight:600}
+.header{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  flex-wrap:wrap;margin-bottom:26px;
+}
+.brand-line{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.brand-mark{
+  width:38px;height:38px;border-radius:11px;flex:0 0 auto;
+  background:linear-gradient(150deg,var(--brand),#3b9b98);
+  display:grid;place-items:center;color:#fff;font-weight:700;font-size:17px;
+  box-shadow:0 6px 16px rgba(15,109,116,.28);
+}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--brand);text-transform:uppercase}
+h1{font-size:clamp(21px,3.4vw,29px);margin:0;font-weight:700;letter-spacing:-.01em}
+.subtitle{color:var(--muted);font-size:14px;margin-top:7px}
+.subtitle b{color:var(--ink-2);font-weight:600}
+
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-select,input{border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px;background:#fff;color:var(--ink);min-width:150px;font-family:inherit;font-size:13.5px;transition:border-color .15s,box-shadow .15s}
-select:hover,input:hover{border-color:#c7ced6}
-select:focus,input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(31,111,120,.12)}
-input::placeholder{color:#98a2b3}
+.field{position:relative;display:flex;align-items:center}
+.field svg{position:absolute;right:12px;width:16px;height:16px;color:var(--faint);pointer-events:none}
+input#search{padding-right:36px}
+select,input{
+  font-family:inherit;font-size:14px;color:var(--ink);
+  border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:10px 13px;background:var(--surface);min-width:180px;
+  transition:border-color .15s, box-shadow .15s;
+}
+select{cursor:pointer;background-image:none}
+select:hover,input:hover{border-color:#d3d8e0}
+select:focus,input:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
+::placeholder{color:var(--faint)}
 
-/* ---------- KPI cards ---------- */
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-card)}
-.kpi{display:flex;flex-direction:column;gap:2px;position:relative;overflow:hidden}
-.kpi::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-.kpi .label{font-size:12.5px;color:var(--muted);margin-bottom:6px;font-weight:600}
-.kpi .value{font-size:26px;font-weight:800;letter-spacing:-.3px}
-.kpi .hint{font-size:11.5px;color:var(--muted);margin-top:4px}
+/* ---------- KPIs ---------- */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.kpi{padding:20px 22px;position:relative;overflow:hidden}
+.kpi::before{
+  content:"";position:absolute;top:0;right:0;width:3px;height:100%;
+  background:var(--brand);opacity:.9;
+}
+.kpi .label{font-size:13px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:8px}
+.kpi .label svg{width:16px;height:16px;color:var(--brand)}
+.kpi .value{font-size:30px;font-weight:700;letter-spacing:-.02em;margin:10px 0 4px;line-height:1}
+.kpi .hint{font-size:12px;color:var(--faint)}
 
-.section-title{font-size:16.5px;font-weight:800;margin:0 0 14px;display:flex;align-items:center;gap:8px}
-.section-title::before{content:"";width:4px;height:16px;border-radius:4px;background:var(--accent);display:inline-block}
+/* ---------- Section headings ---------- */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 14px}
+.section-title{font-size:17px;font-weight:700;margin:0;letter-spacing:-.01em}
+.section-note{font-size:12.5px;color:var(--faint)}
+.block{margin-bottom:22px}
+.panel{padding:20px 22px}
 
 /* ---------- Table ---------- */
-.card.tablecard{padding:20px 20px 8px;margin-bottom:16px}
-.table-wrap{overflow:auto;border-radius:var(--radius-md);border:1px solid var(--line)}
-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;font-size:12.8px}
-th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
-th{background:#f8fafc;font-weight:700;color:#344054;white-space:nowrap;position:sticky;top:0}
-tbody tr:nth-child(even) td{background:#fafbfc}
-tbody tr:hover td{background:#f2f8f7}
-tr:last-child td{border-bottom:0}
-.missing-text{color:var(--danger);font-weight:700}
-.ok-text{color:var(--ok);font-weight:600}
+.table-wrap{overflow:auto;border-radius:var(--radius);border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;min-width:860px}
+thead th{
+  background:var(--surface-2);font-weight:600;color:var(--ink-2);
+  white-space:nowrap;padding:13px 14px;text-align:right;
+  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2;font-size:12.5px;
+}
+tbody td{padding:13px 14px;border-bottom:1px solid var(--line-soft);text-align:right;vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--surface-2)}
+td .pname{font-weight:600;color:var(--ink)}
+td .pnote{color:var(--muted);font-size:12px;margin-top:3px;display:block;max-width:340px}
+.idx{color:var(--faint);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink-2);white-space:nowrap}
+.date{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink-2)}
+.date.missing{color:var(--danger);font-weight:600}
+
+/* ---------- Badges ---------- */
+.badge{
+  display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+  padding:4px 10px;border-radius:999px;white-space:nowrap;
+  background:var(--gray-soft);color:var(--gray);border:1px solid var(--gray-line);
+}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.85}
+.badge.ok{background:var(--ok-soft);color:var(--ok);border-color:var(--ok-line)}
+.badge.warn{background:var(--warn-soft);color:var(--warn);border-color:var(--warn-line)}
+.badge.donor{background:var(--brand-soft);color:var(--brand-ink);border-color:var(--brand-line)}
+.badge.donor::before{display:none}
 
 /* ---------- Timeline ---------- */
-.card.timelinecard{padding:20px}
-.timeline{position:relative;overflow:auto;padding-bottom:2px;direction:rtl;max-height:440px;border:1px solid var(--line);border-radius:var(--radius-md);background:#fff;scrollbar-width:thin}
-.months{display:grid;grid-template-columns:170px repeat(32,42px);gap:0;border-bottom:1px solid var(--line);min-width:1514px;direction:rtl;position:sticky;top:0;background:#fff;z-index:5}
-.months div{font-size:11px;color:var(--muted);padding:8px 3px;border-left:1px solid var(--line);white-space:nowrap;direction:rtl;text-align:center;font-weight:600}
-.row{display:grid;grid-template-columns:170px repeat(32,42px);min-width:1514px;align-items:center;border-bottom:1px solid #f0f2f5;min-height:32px;direction:rtl;transition:background .1s}
-.row:hover{background:#fafcfc}
-.row .pname{font-size:10.5px;font-weight:700;padding:5px 8px;color:#344054;direction:rtl;text-align:right;position:sticky;right:0;background:#fff;z-index:3;border-left:1px solid var(--line)}
-.barwrap{grid-column:2 / -1;position:relative;height:17px;direction:rtl}
-.bar{position:absolute;height:15px;border-radius:999px;background:linear-gradient(270deg,#1f6f78,#52a8a2);top:1px;box-shadow:0 3px 9px rgba(31,111,120,.18)}
-.bar.missing{background:repeating-linear-gradient(45deg,#d0d5dd,#d0d5dd 6px,#eaecf0 6px,#eaecf0 12px)}
-.legend{display:flex;gap:18px;color:var(--muted);font-size:12px;margin-top:12px;flex-wrap:wrap}
-.legend span{display:flex;align-items:center}
-.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#1f6f78;margin-left:6px}
-.dot.missing{background:repeating-linear-gradient(45deg,#d0d5dd,#d0d5dd 3px,#eaecf0 3px,#eaecf0 6px);border-radius:3px}
-
-/* ---------- Project cards ---------- */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:8px}
-.project-card{display:flex;flex-direction:column;gap:12px;transition:transform .15s,box-shadow .15s}
-.project-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(16,24,40,.09)}
-.badges{display:flex;gap:8px;flex-wrap:wrap}
-.badge{font-size:11.5px;padding:4px 10px;border-radius:999px;background:#eef6f6;color:#115e59;border:1px solid #cde8e5;font-weight:600}
-.badge.warn{background:#fff7ed;color:#b54708;border-color:#fed7aa}
-.badge.gray{background:#f2f4f7;color:#475467;border-color:#eaecf0}
-.badge.ok{background:#ecfdf3;color:#027a48;border-color:#abefc6}
-.p-title{font-weight:800;font-size:14.5px;min-height:44px;line-height:1.4}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;font-size:12px;color:var(--muted)}
-.meta div b{color:var(--ink)}
-.progress{height:7px;background:#eaecf0;border-radius:999px;overflow:hidden}
-.progress div{height:100%;background:#0f766e;border-radius:999px}
-
-.empty-state{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}
-.footer-note{font-size:12px;color:var(--warn);margin-top:14px;padding:10px 14px;background:#fffaf0;border:1px solid #fed7aa;border-radius:var(--radius-sm)}
-
-/* ---------- Responsive ---------- */
-@media(max-width:1080px){
-  .cards{grid-template-columns:repeat(2,1fr)}
+.timeline{
+  position:relative;overflow:auto;border:1px solid var(--line);
+  border-radius:var(--radius);background:var(--surface);max-height:440px;
+  scrollbar-width:thin;box-shadow:var(--shadow);
 }
-@media(max-width:900px){
-  .kpis{grid-template-columns:repeat(3,1fr)}
-  .container{padding:24px 18px 48px}
+.tl-grid{--name-col:180px;--cell:44px;min-width:calc(var(--name-col) + 32 * var(--cell));direction:rtl}
+.months{
+  display:grid;grid-template-columns:var(--name-col) repeat(32,var(--cell));
+  border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:6;
 }
-@media(max-width:760px){
-  .header{flex-direction:column;align-items:stretch}
-  .toolbar{width:100%}
-  .toolbar select,.toolbar input{flex:1;min-width:120px}
-  .kpis{grid-template-columns:1fr 1fr}
-  .cards{grid-template-columns:1fr}
+.months div{
+  font-size:11px;color:var(--muted);padding:9px 3px;text-align:center;white-space:nowrap;
+  border-left:1px solid var(--line-soft);font-variant-numeric:tabular-nums;
 }
-@media(max-width:520px){
-  h1{font-size:21px}
+.months div:first-child{
+  text-align:right;padding-right:16px;font-weight:600;color:var(--ink-2);
+  position:sticky;right:0;background:var(--surface);z-index:7;border-left:1px solid var(--line);
+}
+.row{
+  display:grid;grid-template-columns:var(--name-col) repeat(32,var(--cell));
+  align-items:center;border-bottom:1px solid var(--line-soft);min-height:38px;
+}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--surface-2)}
+.row:hover .pname{background:var(--surface-2)}
+.pname{
+  font-size:12px;font-weight:600;color:var(--ink-2);padding:8px 16px 8px 10px;
+  text-align:right;position:sticky;right:0;background:var(--surface);z-index:4;
+  border-left:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:background .1s;
+}
+.barwrap{grid-column:2 / -1;position:relative;height:20px;direction:rtl}
+.bar{
+  position:absolute;height:16px;border-radius:999px;top:2px;
+  background:linear-gradient(270deg,var(--brand),#4aa8a3);
+  box-shadow:0 2px 8px rgba(15,109,116,.25);cursor:default;
+}
+.bar.missing{
+  background:repeating-linear-gradient(45deg,#d0d5dd,#d0d5dd 6px,#eaecf0 6px,#eaecf0 12px);
+  box-shadow:none;
+}
+.legend{display:flex;gap:18px;color:var(--muted);font-size:12.5px;margin-top:12px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:22px;height:9px;border-radius:999px;background:linear-gradient(270deg,var(--brand),#4aa8a3)}
+.swatch.missing{background:repeating-linear-gradient(45deg,#d0d5dd,#d0d5dd 4px,#eaecf0 4px,#eaecf0 8px)}
+
+/* ---------- Cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.project-card{
+  padding:18px 19px;display:flex;flex-direction:column;gap:13px;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.project-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(16,24,40,.09);border-color:var(--brand-line)}
+.pc-badges{display:flex;gap:8px;flex-wrap:wrap}
+.pc-title{font-weight:700;font-size:15.5px;line-height:1.45;color:var(--ink);letter-spacing:-.01em}
+.pc-meta{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;font-size:12.5px}
+.pc-meta .k{color:var(--faint);display:block;margin-bottom:1px}
+.pc-meta .v{color:var(--ink-2);font-weight:600}
+.pc-fund{
+  margin-top:2px;padding-top:13px;border-top:1px solid var(--line-soft);
+  display:flex;align-items:baseline;justify-content:space-between;gap:8px;
+}
+.pc-fund .k{font-size:12.5px;color:var(--muted)}
+.pc-fund .v{font-size:16px;font-weight:700;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+.prog-line{display:flex;align-items:center;gap:10px}
+.progress{height:7px;background:#eef1f4;border-radius:999px;overflow:hidden;flex:1}
+.progress>div{height:100%;background:linear-gradient(270deg,var(--brand),#4aa8a3);border-radius:999px;transition:width .5s ease}
+.prog-pct{font-size:12px;font-weight:700;color:var(--brand-ink);font-variant-numeric:tabular-nums;min-width:34px;text-align:left}
+
+/* ---------- States ---------- */
+.empty-state{text-align:center;color:var(--muted);padding:40px 16px;font-size:13.5px}
+.empty-state svg{width:34px;height:34px;color:var(--faint);margin-bottom:10px;display:block;margin-inline:auto}
+.skeleton-row td{color:var(--faint);text-align:center;padding:34px}
+.notice{
+  font-size:13px;margin-top:14px;padding:12px 15px;border-radius:var(--radius-sm);
+  background:var(--warn-soft);color:var(--warn);border:1px solid var(--warn-line);
+  display:flex;align-items:center;gap:9px;
+}
+.notice svg{width:17px;height:17px;flex:0 0 auto}
+.error-cell{color:var(--danger);font-weight:600;text-align:center;padding:34px}
+.footer{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--faint);text-align:center}
+
+@media(max-width:920px){
   .kpis{grid-template-columns:1fr}
-  .kpi .value{font-size:22px}
-  table{font-size:11.5px}
-  th,td{padding:8px 8px}
+  .header{align-items:stretch}
+  .toolbar{width:100%}
+  .toolbar>*{flex:1}
 }
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="header">
+
+  <header class="header">
     <div>
-      <h1>قائمة برامج التعليم - مؤسسة ملهم 2026</h1>
+      <div class="brand-line">
+        <div class="brand-mark">م</div>
+        <span class="eyebrow">مؤسسة ملهم · 2026</span>
+      </div>
+      <h1>برامج التعليم</h1>
       <div class="subtitle">المسؤول المباشر: <b>سنا حواصلي</b> — مسؤول أول لبرنامج التعليم</div>
     </div>
     <div class="toolbar">
-      <input id="search" placeholder="بحث باسم المشروع أو المانح">
+      <div class="field">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" placeholder="بحث باسم المشروع أو المانح">
+      </div>
       <select id="donorFilter"><option value="">كل المانحين</option></select>
-      <select id="statusFilter"><option value="">كل الحالات</option></select>
     </div>
-  </div>
+  </header>
 
-  <div class="kpis">
-    <div class="card kpi"><div class="label">عدد المشاريع</div><div class="value" id="kpiProjects"></div><div class="hint">ضمن الملف الحالي</div></div>
-    <div class="card kpi"><div class="label">إجمالي التمويل المحتمل</div><div class="value" id="kpiFunding"></div><div class="hint">حسب عمود الميزانية من ملف المنح</div></div>
-    <div class="card kpi"><div class="label">متوسط نسبة الإنجاز</div><div class="value" id="kpiProgress"></div><div class="hint">للمشاريع الظاهرة حالياً</div></div>
-  </div>
+  <section class="kpis">
+    <div class="card kpi">
+      <div class="label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg>
+        عدد المشاريع
+      </div>
+      <div class="value" id="kpiProjects">—</div>
+      <div class="hint">ضمن النتائج المعروضة حالياً</div>
+    </div>
+    <div class="card kpi">
+      <div class="label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        إجمالي التمويل المحتمل
+      </div>
+      <div class="value" id="kpiFunding">—</div>
+      <div class="hint">مجموع عمود التمويل المحتمل</div>
+    </div>
+    <div class="card kpi">
+      <div class="label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-4 4"/></svg>
+        متوسط نسبة الإنجاز
+      </div>
+      <div class="value" id="kpiProgress">—</div>
+      <div class="hint">للمشاريع الظاهرة حالياً</div>
+    </div>
+  </section>
 
-  <div class="card tablecard">
-    <h2 class="section-title">قائمة البرامج</h2>
+  <section class="block">
+    <div class="section-head">
+      <h2 class="section-title">قائمة البرامج</h2>
+      <span class="section-note">جدول تفصيلي بكل البرامج والحالات</span>
+    </div>
     <div class="table-wrap">
       <table id="detailsTable">
         <thead>
           <tr>
-            <th>#</th><th>اسم المشروع</th><th>المانح</th><th>المنطقة</th><th>الحالة</th><th>تاريخ البدء</th><th>تاريخ الانتهاء</th><th>التمويل المحتمل</th>
+            <th>#</th><th>اسم المشروع</th><th>المانح</th><th>المنطقة</th><th>الحالة</th>
+            <th>تاريخ البدء</th><th>تاريخ الانتهاء</th><th>التمويل المحتمل</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
-  </div>
+  </section>
 
-  <div class="card timelinecard">
-    <h2 class="section-title">الخريطة الزمنية للبرامج</h2>
+  <section class="block">
+    <div class="section-head">
+      <h2 class="section-title">الخريطة الزمنية للبرامج</h2>
+      <span class="section-note">2026 — 2028</span>
+    </div>
     <div class="timeline" id="timeline"></div>
     <div class="legend">
-      <span><i class="dot"></i> الشريط يوضح فترة المشروع من تاريخ البدء إلى تاريخ الانتهاء</span>
-      <span><i class="dot missing"></i> فترة تقديرية — تاريخ البدء أو الانتهاء غير محدد بعد</span>
+      <span><i class="swatch"></i> فترة المشروع من تاريخ البدء إلى الانتهاء</span>
+      <span><i class="swatch missing"></i> تاريخ غير محدد (تقدير مؤقت)</span>
     </div>
-  </div>
+  </section>
 
-  <h2 class="section-title">بطاقات البرامج</h2>
-  <div class="cards" id="cards"></div>
+  <section class="block">
+    <div class="section-head">
+      <h2 class="section-title">بطاقات البرامج</h2>
+      <span class="section-note">عرض سريع لكل برنامج</span>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <div class="footer">مصدر البيانات: قاعدة بيانات برامج التعليم (Google Sheets) عبر واجهة API — يتحدّث تلقائياً.</div>
 </div>
 
 <script>
@@ -164,7 +305,7 @@ tr:last-child td{border-bottom:0}
  *  مصدر البيانات: Google Sheets عبر Google Apps Script API
  *  عدّل القيمتين أدناه فقط بعد نشر الـ Web App (راجع دليل الإعداد المرفق).
  * ========================================================================== */
-const API_URL   = 'https://script.google.com/macros/s/AKfycbzblLbt5A1zcl05_NHYkNbL7BA5LLOss1PKBuR4wp9aak2A7HZZ-Drq-92MHKx0EzQ/exec';   // مثال: https://script.google.com/macros/s/XXXXX/exec
+const API_URL   = 'https://script.google.com/macros/s/AKfycbxxVPOvj1-fOpuu4SZIrSNCJVhd4Wy9GUtIwwNIteZdkjDYRbtNXggXFJwlLvkA9GDk/exec';   // مثال: https://script.google.com/macros/s/XXXXX/exec
 const API_TOKEN = 'ngfodvdmXtEHkVQEwBKspE_nTB4YSdfE';     // نفس القيمة الموجودة في ورقة Settings > API_TOKEN
 const LOCAL_CACHE_KEY = 'molham_projects_cache_v1';
 
@@ -196,108 +337,181 @@ async function loadData(){
   }
 }
 
+/* ---------- الخريطة الزمنية: 32 شهراً من 2026-01 ---------- */
 const startBase = new Date('2026-01-01');
 const months = [];
 for(let i=0;i<32;i++){
   const d = new Date(startBase); d.setMonth(d.getMonth()+i);
-  months.push({key:d.toISOString().slice(0,7), label: String(d.getMonth()+1).padStart(2,'0') + '/' + String(d.getFullYear()).slice(2)});
+  months.push({
+    key:d.toISOString().slice(0,7),
+    label: String(d.getMonth()+1).padStart(2,'0') + '/' + String(d.getFullYear()).slice(2)
+  });
 }
+
+/* ---------- أدوات مساعدة ---------- */
 function money(n){return n==null ? 'غير محدد' : '$' + Number(n).toLocaleString('en-US');}
-function dateTxt(v){if(!v) return 'غير محدد'; const d=new Date(v+'T00:00:00'); return d.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'numeric'});}
+function dateTxt(v){
+  if(!v) return 'غير محدد';
+  const d=new Date(v+'T00:00:00');
+  return d.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'numeric'});
+}
+function pct(p){return Math.round((p||0)*100);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function statusBadgeClass(status){
   const s = status || '';
   if(/قيد التنفيذ|منجز/.test(s)) return 'ok';
-  if(/انتظار|مراجعة|دراسة|موافقات/.test(s)) return 'warn';
-  return 'gray';
+  if(/انتظار|مراجعة|دراسة|موافقات|إطلاق|مناقصات/.test(s)) return 'warn';
+  return '';
 }
+
 function getFiltered(){
   const q = document.getElementById('search').value.trim().toLowerCase();
   const donor = document.getElementById('donorFilter').value;
-  const status = document.getElementById('statusFilter').value;
   return projects.filter(p=>{
     const hay = (p.name+' '+p.donor+' '+p.status+' '+p.area).toLowerCase();
     const okQ = !q || hay.includes(q);
     const okD = !donor || p.donor===donor;
-    const okS = !status || p.status===status;
-    return okQ && okD && okS;
+    return okQ && okD;
   });
 }
 
+/* ---------- العرض ---------- */
 function render(){
   const data = getFiltered();
+
   document.getElementById('kpiProjects').textContent = data.length;
-  document.getElementById('kpiFunding').textContent = money(data.reduce((s,p)=>s+(p.potential_funding||0),0));
+  document.getElementById('kpiFunding').textContent  = money(data.reduce((s,p)=>s+(p.potential_funding||0),0));
   const avg = data.length ? data.reduce((s,p)=>s+(p.progress||0),0)/data.length : 0;
   document.getElementById('kpiProgress').textContent = Math.round(avg*100) + '%';
 
+  renderTable(data);
+  renderTimeline(data);
+  renderCards(data);
+}
+
+function renderTable(data){
+  const tbody = document.querySelector('#detailsTable tbody');
+  if(!data.length){
+    tbody.innerHTML = `<tr><td colspan="8" class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      لا توجد نتائج مطابقة للبحث الحالي</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = data.map((p,i)=>`
+    <tr>
+      <td class="idx">${i+1}</td>
+      <td><span class="pname">${esc(p.name)}</span>${p.notes?`<span class="pnote">${esc(p.notes)}</span>`:''}</td>
+      <td><span class="badge donor">${esc(p.donor)}</span></td>
+      <td>${esc(p.area)}</td>
+      <td><span class="badge ${statusBadgeClass(p.status)}">${esc(p.status)}</span></td>
+      <td class="date ${p.start?'':'missing'}">${dateTxt(p.start)}</td>
+      <td class="date ${p.end?'':'missing'}">${dateTxt(p.end)}</td>
+      <td class="num">${money(p.potential_funding)}</td>
+    </tr>`).join('');
+}
+
+function renderTimeline(data){
   const timeline = document.getElementById('timeline');
-  timeline.innerHTML = '';
   if(!data.length){
     timeline.innerHTML = '<div class="empty-state">لا توجد نتائج مطابقة للبحث الحالي</div>';
-  } else {
-  const header = document.createElement('div'); header.className='months';
+    return;
+  }
+  const grid = document.createElement('div');
+  grid.className = 'tl-grid';
+
+  const header = document.createElement('div');
+  header.className = 'months';
   header.innerHTML = '<div>المشروع</div>' + months.map(m=>`<div>${m.label}</div>`).join('');
-  timeline.appendChild(header);
+  grid.appendChild(header);
+
   data.forEach(p=>{
-    const r=document.createElement('div'); r.className='row';
-    const name=document.createElement('div'); name.className='pname'; name.textContent=p.name; r.appendChild(name);
-    const wrap=document.createElement('div'); wrap.className='barwrap';
-    const bar=document.createElement('div'); bar.className='bar ' + (!(p.start&&p.end)?'missing':'');
+    const r = document.createElement('div'); r.className='row';
+    const name = document.createElement('div'); name.className='pname';
+    name.textContent = p.name; name.title = p.name;
+    r.appendChild(name);
+
+    const wrap = document.createElement('div'); wrap.className='barwrap';
+    const bar = document.createElement('div');
+    bar.className = 'bar ' + (!(p.start&&p.end)?'missing':'');
+
     let startIdx=0, endIdx=1;
     if(p.start){ startIdx = (new Date(p.start).getFullYear()-2026)*12 + new Date(p.start).getMonth(); }
     if(p.end){ endIdx = (new Date(p.end).getFullYear()-2026)*12 + new Date(p.end).getMonth()+1; }
     if(!p.start && !p.end){ startIdx=0; endIdx=32; }
     if(p.start && !p.end){ endIdx=Math.min(startIdx+5,32); }
     if(!p.start && p.end){ startIdx=Math.max(endIdx-5,0); }
-    bar.style.right = (startIdx*42)+'px';
-    bar.style.width = (Math.max(endIdx-startIdx,1)*42-6)+'px';
-    bar.title = p.name + '\nتاريخ البدء: ' + dateTxt(p.start) + '\nتاريخ الانتهاء: ' + dateTxt(p.end);
-    wrap.appendChild(bar); r.appendChild(wrap); timeline.appendChild(r);
-  });
-  }
-document.getElementById('cards').innerHTML = data.length ? data.map(p=>`
-    <div class="card project-card">
-      <div class="badges"><span class="badge">${p.donor}</span><span class="badge ${statusBadgeClass(p.status)}">${p.status}</span></div>
-      <div class="p-title">${p.name}</div>
-      <div class="meta"><div>المنطقة: <b>${p.area}</b></div><div>تاريخ البدء: <b>${dateTxt(p.start)}</b></div><div>تاريخ الانتهاء: <b>${dateTxt(p.end)}</b></div><div>الإنجاز: <b>${Math.round((p.progress||0)*100)}%</b></div></div>
-      <div class="progress"><div style="width:${Math.round((p.progress||0)*100)}%"></div></div>
-      <div class="meta"><div>التمويل المحتمل: <b>${money(p.potential_funding)}</b></div></div>
-    </div>
-  `).join('') : '<div class="card empty-state">لا توجد نتائج مطابقة للبحث الحالي</div>';
+    startIdx=Math.max(0,Math.min(startIdx,32));
+    endIdx=Math.max(startIdx+1,Math.min(endIdx,32));
 
-  const tbody = document.querySelector('#detailsTable tbody');
-  tbody.innerHTML = data.length ? data.map((p,i)=>{
-    return `<tr>
-      <td>${i+1}</td><td><b>${p.name}</b><br><span style="color:#667085">${p.notes||''}</span></td><td>${p.donor}</td><td>${p.area}</td><td><span class="badge ${statusBadgeClass(p.status)}">${p.status}</span></td>
-      <td class="${p.start?'ok-text':'missing-text'}">${dateTxt(p.start)}</td>
-      <td class="${p.end?'ok-text':'missing-text'}">${dateTxt(p.end)}</td>
-      <td>${money(p.potential_funding)}</td>
-    </tr>`;
-  }).join('') : '<tr><td colspan="8" class="empty-state">لا توجد نتائج مطابقة للبحث الحالي</td></tr>';
+    bar.style.right = (startIdx*44)+'px';
+    bar.style.width = (Math.max(endIdx-startIdx,1)*44-8)+'px';
+    bar.title = p.name + '\nتاريخ البدء: ' + dateTxt(p.start) + '\nتاريخ الانتهاء: ' + dateTxt(p.end);
+
+    wrap.appendChild(bar); r.appendChild(wrap); grid.appendChild(r);
+  });
+
+  timeline.innerHTML = '';
+  timeline.appendChild(grid);
 }
+
+function renderCards(data){
+  const cards = document.getElementById('cards');
+  if(!data.length){
+    cards.innerHTML = '<div class="card empty-state">لا توجد نتائج مطابقة للبحث الحالي</div>';
+    return;
+  }
+  cards.innerHTML = data.map(p=>`
+    <div class="card project-card">
+      <div class="pc-badges">
+        <span class="badge donor">${esc(p.donor)}</span>
+        <span class="badge ${statusBadgeClass(p.status)}">${esc(p.status)}</span>
+      </div>
+      <div class="pc-title">${esc(p.name)}</div>
+      <div class="pc-meta">
+        <div><span class="k">المنطقة</span><span class="v">${esc(p.area)||'—'}</span></div>
+        <div><span class="k">الإنجاز</span><span class="v">${pct(p.progress)}%</span></div>
+        <div><span class="k">تاريخ البدء</span><span class="v">${dateTxt(p.start)}</span></div>
+        <div><span class="k">تاريخ الانتهاء</span><span class="v">${dateTxt(p.end)}</span></div>
+      </div>
+      <div class="prog-line">
+        <div class="progress"><div style="width:${pct(p.progress)}%"></div></div>
+        <span class="prog-pct">${pct(p.progress)}%</span>
+      </div>
+      <div class="pc-fund">
+        <span class="k">التمويل المحتمل</span>
+        <span class="v">${money(p.potential_funding)}</span>
+      </div>
+    </div>`).join('');
+}
+
+/* ---------- الإقلاع ---------- */
 async function init(){
   const tbody = document.querySelector('#detailsTable tbody');
-  tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted)">... جاري تحميل البيانات</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="8" class="skeleton-row">… جاري تحميل البيانات</td></tr>';
 
   const loadResult = await loadData();
 
   if(loadResult === false){
-    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center" class="missing-text">تعذر الاتصال بمصدر البيانات (Google Sheets API). تحقق من رابط الـ API والرمز في أعلى الصفحة.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" class="error-cell">تعذّر الاتصال بمصدر البيانات (Google Sheets API). تحقق من رابط الـ API والرمز في أعلى ملف الصفحة.</td></tr>';
     document.getElementById('cards').innerHTML = '';
+    document.getElementById('timeline').innerHTML = '<div class="empty-state">لا تتوفر بيانات لعرضها.</div>';
     return;
   }
 
-  const donors=[...new Set(projects.map(p=>p.donor))].sort();
-  document.getElementById('donorFilter').innerHTML += donors.map(d=>`<option value="${d}">${d}</option>`).join('');
-  const statuses=[...new Set(projects.map(p=>p.status))].sort();
-  document.getElementById('statusFilter').innerHTML += statuses.map(s=>`<option value="${s}">${s}</option>`).join('');
-  ['search','donorFilter','statusFilter'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+  const donors = [...new Set(projects.map(p=>p.donor).filter(Boolean))].sort();
+  document.getElementById('donorFilter').innerHTML +=
+    donors.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join('');
+
+  ['search','donorFilter'].forEach(id=>
+    document.getElementById(id).addEventListener('input',render));
+
   render();
 
   if(loadResult === 'cached'){
     const note = document.createElement('div');
-    note.className = 'footer-note';
-    note.textContent = 'ملاحظة: تعذر الاتصال بالخادم الآن، البيانات المعروضة من آخر نسخة محفوظة محلياً وقد لا تكون محدّثة.';
+    note.className = 'notice';
+    note.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>'
+      + '<span>تعذّر الاتصال بالخادم الآن — البيانات المعروضة من آخر نسخة محفوظة محلياً وقد لا تكون محدّثة.</span>';
     document.querySelector('.container').appendChild(note);
   }
 }
